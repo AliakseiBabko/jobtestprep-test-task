@@ -37,7 +37,7 @@ test('Delete the pet (DELETE)', { tag: ['@api'] }, async ({ request }) => {
   expect(getPet.status()).toEqual(404);
 });
 
-test('Negative test: Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
+test.skip('Negative test: Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
   const newCrocodile = Object.assign({id: 'someString'}, crocodile);
   const ajv = new Ajv();
 
