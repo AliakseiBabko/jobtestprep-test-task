@@ -37,7 +37,7 @@ test('Delete the pet (DELETE)', { tag: ['@api'] }, async ({ request }) => {
   expect(getPet.status()).toEqual(404);
 });
 
-test('Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
+test('Negative test: Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
   const newCrocodile = Object.assign({id: 'someString'}, crocodile);
   const ajv = new Ajv();
 
@@ -46,7 +46,7 @@ test('Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
   let valid = validate(newCrocodile);
   expect(valid, `Schema errors: ${JSON.stringify(validate.errors)}`).toBeTruthy();
 
-  // basically, the test should stop here because test data is not valid
+  // the test should stop here because test data is not valid
   // id should be a number, not a string
 
   const newPet = await request.post(`${userData.apiTestUrl}`, {
@@ -58,7 +58,7 @@ test('Error handling (POST)', { tag: ['@api'] }, async ({ request }) => {
   });
 
   // if the test data is valid but the status code is 4xx or 5xx
-  // the test will faul and the status code will be displayed in the console 
+  // the test will fail and the status code will be displayed in the console
   expect(newPet, `status code is ${newPet.status()}`).toBeOK();
 
   // validate response data

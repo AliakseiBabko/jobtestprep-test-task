@@ -9,10 +9,11 @@ test('Login with valid credentials', { tag: ['@ui'] }, async ({ page }) => {
   
   // log into the app
   await loginPage.login();
-  // await page.waitForURL('**/logged-in-successfully');
 
   // check that the login was successful
-  await expect(page.locator('h1')).toContainText('Logged In Successfully');
+  const successMessage = page.locator('h1.post-title');
+  await successMessage.waitFor({ state: 'visible'});
+  await expect(successMessage).toContainText('Logged In Successfully');
 });
 
 test('Login with invalid username', { tag: ['@ui'] }, async ({ page }) => {
