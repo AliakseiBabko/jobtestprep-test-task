@@ -1,0 +1,17 @@
+{
+  "category": {
+    "id": 10,
+    "name": "reptilia"
+  },
+  "name": "crocodile",
+  "photoUrls": [
+    "https://en.wikipedia.org/wiki/Crocodile#/media/File:Nile_crocodile_head.jpg"
+  ],
+  "tags": [
+    {
+      "id": 10,
+      "name": "animal"
+    }
+  ],
+  "status": "available"
+}

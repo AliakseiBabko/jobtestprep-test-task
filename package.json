@@ -1,0 +1,22 @@
+{
+  "name": "jobtestprep-test-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:ui": "npx playwright test --grep @ui",
+    "test:api": "npx playwright test --grep @api",
+    "test:uiMode": "npx playwright test --ui --grep '@ui|@api'"
+  },
+  "keywords": [],
+  "author": "Aliaksei Babko",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^22.5.4"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "dotenv": "^16.4.5"
+  }
+}
