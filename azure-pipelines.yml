@@ -1,0 +1,52 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool: Lenovo laptop
+
+jobs:
+- job: Playwright_Tests
+  displayName: 'Run Playwright Tests'
+  timeoutInMinutes: 60
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    # Define any pipeline variables here if needed
+    # Example:
+    # NODE_VERSION: 'lts/*'
+
+  steps:
+  - checkout: self
+    displayName: 'Checkout Repository'
+
+  - task: NodeTool@0
+    displayName: 'Install Node.js'
+    inputs:
+      versionSpec: 'lts/*'
+
+  - script: npm ci
+    displayName: 'Install Dependencies'
+
+  - script: npx playwright install --with-deps
+    displayName: 'Install Playwright Browsers'
+
+  - script: npx playwright test
+    displayName: 'Run Playwright Tests'
+    env:
+      LOGIN: $(LOGIN)
+      PASSWORD: $(PASSWORD)
+      API_KEY: $(API_KEY)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Upload Playwright Report'
+    condition: always()  # Ensures the artifact is uploaded even if tests fail
+    inputs:
+      targetPath: 'playwright-report/'
+      artifact: 'playwright-report'
+      publishLocation: 'pipeline'
+      # retentionDays is not directly supported, artifacts are retained based on the pipeline retention policy
