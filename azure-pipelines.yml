@@ -4,7 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  branches:
+    include:
+      - main
+      - master
 
 pool: Lenovo laptop
 
@@ -16,9 +19,9 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   variables:
-    # Define any pipeline variables here if needed
-    # Example:
-    # NODE_VERSION: 'lts/*'
+    LOGIN: $(LOGIN)
+    PASSWORD: $(PASSWORD)
+    API_KEY: $(API_KEY)
 
   steps:
   - checkout: self
